@@ -4,24 +4,24 @@ import pandas
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
-matrix = pandas.read_excel('username_and_password.xlsx', sheet_name = 'Sheet1')
-print (matrix)
 
-
-browser = webdriver.Firefox()
+browser = webdriver.Chrome()
 browser.get('https://dms.jaipur.manipal.edu/loginForm.aspx')
 
 
-def findCGPA(username, password, num):
+def findCGPA(username, password, num = 1):
     username_box = browser.find_element_by_id('txtUserid')
     username_box.send_keys(Keys.CONTROL + 'a')
     username_box.send_keys(username)
 
+    print ("username entered")
+
     password_box = browser.find_element_by_id('txtpassword')
     password_box.send_keys(password)
 
+    print ("password entered")
 
-    login = browser.find_element_by_id('btnLogin')
+    login = browser.find_element_by_id('hprlnkStduent')
     login.click()
 
     time.sleep(0.6)
@@ -48,19 +48,24 @@ def findCGPA(username, password, num):
 
     return cgpa
 
+# matrix = pandas.read_excel('username_and_password.xlsx', sheet_name = 'Sheet1')
+# print (matrix)
 
-header_list = ['username', 'dob', 'password', 'cgpa']
-matrix = matrix.reindex(columns = header_list)
+# header_list = ['username', 'dob', 'password', 'cgpa']
+# matrix = matrix.reindex(columns = header_list)
 
-for i in range (0, 43):
-    usr = matrix.at[i, 'username']
-    pas = matrix.at[i, 'password']
-    matrix.ix[i, 'cgpa'] = findCGPA(usr, pas, i+1)
+# for i in range (0, 43):
+#     usr = matrix.at[i, 'username']
+#     pas = matrix.at[i, 'password']
+#     matrix.ix[i, 'cgpa'] = findCGPA(usr, pas, i+1)
 
+ans = findCGPA('189301179', '11mar1999')
+print ('answer = ')
+print (ans)
 
 browser.quit()
 
 
-print (matrix)
-matrix.to_excel('result1.xlsx')
-print ("Exported.")
+# print (matrix)
+# matrix.to_excel('result1.xlsx')
+# print ("Exported.")
