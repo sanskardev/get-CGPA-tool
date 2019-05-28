@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MUJ Results</string>
+    <string name="submit">Get Result</string>
+    <string name="dob">Date of Birth</string>
+    <string name="reg_no">Registration Number</string>
+</resources>
